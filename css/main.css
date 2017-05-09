@@ -1,0 +1,28 @@
+.navbar-toggle{
+	background-color: #EBEBEB; 
+}
+
+.navbar-toggle > .icon-bar{
+	background-color: #333333;
+}
+.navbar-brand > img{
+	height: 20px;
+}
+
+@media (min-width: 1600px){
+	.container {
+	     width: 1400px; 
+	}
+}
+@media (min-width: 1200px){
+	.nav-center{
+		position: absolute;
+	 	left: 50%;
+	  	transform: translate(-50%, 0%);
+	}
+}
+@media (min-width:769px){
+	hr {
+	    display: none;
+	}
+}

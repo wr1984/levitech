@@ -76,7 +76,10 @@
 				yz.shake();
 			}
 		})
-	}
+	};
+	tree.addEventListener('mousemove',function(e){
+		e.preventDefault();
+	});
 	
 	function initSucai(name1, name2, count, origin, svg) {
 		var arr = [];

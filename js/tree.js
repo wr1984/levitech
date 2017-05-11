@@ -1,13 +1,28 @@
 ;(function(window,document){
-	
+	var screenW = window.innerWidth;
 	//获取窗口高度-nav高度，指定tree展示窗口高度
 	var tree_height = window.innerHeight - 50;
 	var height = tree_height;
 	if(tree_height < 568){
 		tree_height = 568;
 	}
+	if(tree_height > 1200){
+		tree_height = 1200;
+	}
 	var tree = document.querySelector('.tree');
 	tree.style.height = tree_height + 'px';
+	var width = tree.offsetWidth;
+	
+	//指示器位置
+	var indicators = document.querySelector('.indicators');
+	indicators.style.top = height/2+'px';
+	indicators.style.right = (screenW-width)/4 -5+ 'px';
+	//左侧关注图标
+	var attention = document.querySelector('.attention');
+	attention.style.top = height/2 + 'px';
+	attention.style.left = (screenW-width)/4 -15 + 'px';
+	
+	
 	//获取tree背景图片在该高度下的宽度指定给move，要确保背景图片和svg一样 的宽和高。
 	var img_bg = document.querySelector('#img_bg');
 	var move = document.querySelector('.move');
@@ -50,15 +65,25 @@
 	
 	window.addEventListener('resize',resizeEvent);
 	function resizeEvent(){
+		screenW = window.innerWidth;
 		tree_height = window.innerHeight - 50;
 		height = tree_height;
 		if(tree_height > 568){
 			tree.style.height = tree_height + 'px';
-			
 		}
-		
+		if(tree_height > 1200){
+			tree_height = 1200;
+		}
+		width = tree.offsetWidth;
 		img_width = img_bg.offsetWidth;
 		move.style.width = img_width + 'px';
+		
+			//指示器位置
+		indicators.style.top = height/2+'px';
+		indicators.style.right = (screenW-width)/4 -5+ 'px';
+		//左侧关注图标
+		attention.style.top = height/2 + 'px';
+		attention.style.left = (screenW-width)/4 -15 + 'px';
 	}
 	
 	setInterval(function(){

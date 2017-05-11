@@ -1,4 +1,4 @@
-(function(){
+;(function(){
 	var header = document.getElementById('header');
 	
 var str = ["				<!--头部开始-->",
@@ -43,7 +43,7 @@ var str = ["				<!--头部开始-->",
 "					<hr />",
 "					<ul class=\"nav navbar-nav navbar-right search\">",
 "						<li>",
-"							<a href=\"#\">CN/EN</a>",
+"							<a href=\"#\">Cn/En</a>",
 "						</li>",
 "						<li>",
 "							<a href=\"#\">SEARCH</a>",

@@ -1,11 +1,12 @@
 define(['three', 'tweenMax'], function(THREE, tm) {
-	let t = [5,10,20,]
-	let tlRotate,tlMove;
-	let easeArr = [SlowMo.ease.config(0.5, 0.4, false),
+//	let t = [5,10,20,];
+	var tlRotate;
+	var tlMove;
+	var easeArr = [SlowMo.ease.config(0.5, 0.4, false),
 					Bounce.easeInOut,Power4.easeInOut,
 					 Back.easeInOut.config(4),Power0.easeNone,Expo.easeInOut,Bounce.easeInOut];
 					 //Elastic.easeInOut.config(2.5, 0.1),
-	let minDistance = 10;
+	var minDistance = 10;
 	class Star {
 		constructor(params) {
 			this.mesh = params.mesh;

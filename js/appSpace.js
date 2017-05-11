@@ -64,6 +64,11 @@ define(['three','tweenMax','star'], function(THREE,tm,Star) {
 			attention = document.querySelector('.attention');
 			attention.style.top = height/2 + 'px';
 			attention.style.left = (screenW-width)/4 -15 + 'px';
+			if(screenW >= 768){
+				indicators.style.visibility = "visible";
+				attention.style.visibility = "visible"
+			}
+			
 			
 			scene = new THREE.Scene();
 
@@ -437,6 +442,13 @@ define(['three','tweenMax','star'], function(THREE,tm,Star) {
 			indicators.style.right = (screenW-width)/4-5 + 'px';
 			attention.style.top = height/2 + 'px';
 			attention.style.left = (screenW-width)/4 -15 + 'px';
+			if(screenW >= 768){
+				indicators.style.visibility = "visible";
+				attention.style.visibility = "visible"
+			}else{
+				indicators.style.visibility = "hidden";
+				attention.style.visibility = "hidden"
+			}
 			
 			renderer.setSize(width, height);
 			renderer.setPixelRatio(window.devicePixelRatio);

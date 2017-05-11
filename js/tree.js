@@ -21,6 +21,10 @@
 	var attention = document.querySelector('.attention');
 	attention.style.top = height/2 + 'px';
 	attention.style.left = (screenW-width)/4 -15 + 'px';
+	if(screenW >= 768){
+		indicators.style.visibility = "visible";
+		attention.style.visibility = "visible"
+	}
 	
 	
 	//获取tree背景图片在该高度下的宽度指定给move，要确保背景图片和svg一样 的宽和高。
@@ -47,11 +51,12 @@
 			move.style.left = left + 'px';
 		},1000/60);
 		
-		var yzOrigin = ["10% 100%", "100% 90%", "100% 100%", "100% 90%", "0% 100%", "100% 100%", "100% 90%", "0% 100%", "100% 100%"];
-		var hdOringin = ["50% 50%", "50% 50%"];
+		var yzOrigin = ["0% 100%", "10% 100%", "0% 50%", "0% 100%", "90% 100%", "100% 60%", "90% 100%", "0% 100%", "0% 100%","10% 100%","100% 100%","0% 100%","0% 100%","100% 60%","100% 80%","100% 100%","0% 100%",
+						"0% 100%", "10% 100%", "0% 50%", "0% 100%", "90% 100%", "100% 60%", "90% 100%", "0% 100%", "0% 100%","10% 100%","100% 100%","0% 100%","0% 100%","100% 60%","100% 80%","100% 100%","0% 100%"];
+		var hdOringin = ["50% 50%", "50% 50%","50% 50%", "50% 50%"];
 
-		hdArr1 = initSucai('hd1_', 'hd2_', 1, hdOringin, svg_yz);
-		sucai1Arr = initSucai('yz1_', 'yz2_', 9, yzOrigin, svg_yz);
+		hdArr1 = initSucai('hd1_', 'hd2_', 4, hdOringin, svg_yz);
+		sucai1Arr = initSucai('yz1_', 'yz2_', 34, yzOrigin, svg_yz);
 
 		sucai1Arr.forEach(function(yz) {
 			yz.init();
@@ -84,6 +89,13 @@
 		//左侧关注图标
 		attention.style.top = height/2 + 'px';
 		attention.style.left = (screenW-width)/4 -15 + 'px';
+		if(screenW >= 768){
+			indicators.style.visibility = "visible";
+			attention.style.visibility = "visible"
+		}else{
+			indicators.style.visibility = "hidden";
+			attention.style.visibility = "hidden"
+		}
 	}
 	
 	setInterval(function(){
@@ -102,7 +114,7 @@
 			}
 		})
 	};
-	tree.addEventListener('mousemove',function(e){
+	tree.addEventListener('mousedown',function(e){
 		e.preventDefault();
 	});
 	
@@ -179,17 +191,17 @@
 				onCompleteParams: [this]
 			});
 			t.to([this.el, this.el2], 10, {
-					y: height + 200,
+					y: 1811,
 				})
 				.to([this.el, this.el2], 15, {
-					x: randomInRange(5, 20) * temp[Math.round(Math.random())],
+					x: randomInRange(15,50) * temp[Math.round(Math.random())],
 					ease: Elastic.easeOut.config(3, 0.1)
 				}, "-=9.8")
 				.to([this.el, this.el2], 6, {
-					rotation: randomInRange(60, 180)* temp[Math.round(Math.random())],
+					rotation: randomInRange(60, 360)* temp[Math.round(Math.random())],
 				}, "-=15")
 				.to([this.el, this.el2], 6, {
-					skewX:randomInRange(60, 90) * temp[Math.round(Math.random())] + 'deg',
+					skewX:randomInRange(30, 360) * temp[Math.round(Math.random())] + 'deg',
 				}, "-=15")
 		}
 

@@ -8,8 +8,5 @@ require.config({
 });
 
 require(['appSpace'],function(App){
-//	document.getElementById('header').addEventListener('click',function(){
-//		$('.collapse').collapse()
-//	})
 	new App();
 });

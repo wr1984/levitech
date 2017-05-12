@@ -35,32 +35,34 @@
 	var move = document.querySelector('.move');
 //	img_bg.style.height = tree_height + 'px';
 	var img_width;
-	img_bg.onload = function(){
+//	img_bg.onload = function(){
+//		console.log('imgload');
 		img_width = img_bg.offsetWidth;
 		move.style.width = img_width + 'px';
-	}
+//	}
 	
-	var embed = document.querySelector('#tree_bg');
-	var svg_yz;
-	window.onload = function(){
-		svg_yz = embed.getSVGDocument().querySelector('#svg');
-		
-
-		hdArr1 = initSucai('hd1_', 'hd2_', 4, hdOringin, svg_yz);
-		sucai1Arr = initSucai('yz1_', 'yz2_', 34, yzOrigin, svg_yz);
-
-		sucai1Arr.forEach(function(yz) {
-			yz.init();
-			yz.grow(randomInRange(3, 10), randomInRange(1, 5));
-		});
-		hdArr1.forEach(function(hd) {
-			hd.init();
-			hd.grow(0.1, 0.1);
-		});
-		
-		
-		run();
-	};
+//	var embed = document.querySelector('#tree_bg');
+//	var svg_yz;
+	
+//	window.onload = function(){
+//		console.log('embed,loaded')
+//		svg_yz = embed.getSVGDocument().querySelector('#svg');
+//		
+//
+//		hdArr1 = initSucai('hd1_', 'hd2_', 4, hdOringin, svg_yz);
+//		sucai1Arr = initSucai('yz1_', 'yz2_', 34, yzOrigin, svg_yz);
+//
+//		sucai1Arr.forEach(function(yz) {
+//			yz.init();
+//			yz.grow(randomInRange(3, 10), randomInRange(1, 5));
+//		});
+//		hdArr1.forEach(function(hd) {
+//			hd.init();
+//			hd.grow(0.1, 0.1);
+//		});
+//		
+//		run();
+//	};
 	var left = null;
 	function run(){
 		left -= 1.5;

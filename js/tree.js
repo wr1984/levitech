@@ -1,4 +1,7 @@
 ;(function(window,document){
+	var yzOrigin = ["0% 100%", "10% 100%", "0% 50%", "0% 100%", "90% 100%", "100% 60%", "90% 100%", "0% 100%", "0% 100%","10% 100%","100% 100%","0% 100%","0% 100%","100% 60%","100% 80%","100% 100%","0% 100%",
+					"0% 100%", "10% 100%", "0% 50%", "0% 100%", "90% 100%", "100% 60%", "90% 100%", "0% 100%", "0% 100%","10% 100%","100% 100%","0% 100%","0% 100%","100% 60%","100% 80%","100% 100%","0% 100%"];
+	var hdOringin = ["50% 50%", "50% 50%","50% 50%", "50% 50%"];
 	var screenW = window.innerWidth;
 	//获取窗口高度-nav高度，指定tree展示窗口高度
 	var tree_height = window.innerHeight - 50;
@@ -42,31 +45,31 @@
 	window.onload = function(){
 		svg_yz = embed.getSVGDocument().querySelector('#svg');
 		
-		var left = null;
-		setInterval(function(){
-			left-=1;
-			if(left <= -img_width/2){
-				left = 0;
-			}
-			move.style.left = left + 'px';
-		},1000/60);
-		
-		var yzOrigin = ["0% 100%", "10% 100%", "0% 50%", "0% 100%", "90% 100%", "100% 60%", "90% 100%", "0% 100%", "0% 100%","10% 100%","100% 100%","0% 100%","0% 100%","100% 60%","100% 80%","100% 100%","0% 100%",
-						"0% 100%", "10% 100%", "0% 50%", "0% 100%", "90% 100%", "100% 60%", "90% 100%", "0% 100%", "0% 100%","10% 100%","100% 100%","0% 100%","0% 100%","100% 60%","100% 80%","100% 100%","0% 100%"];
-		var hdOringin = ["50% 50%", "50% 50%","50% 50%", "50% 50%"];
 
 		hdArr1 = initSucai('hd1_', 'hd2_', 4, hdOringin, svg_yz);
 		sucai1Arr = initSucai('yz1_', 'yz2_', 34, yzOrigin, svg_yz);
 
 		sucai1Arr.forEach(function(yz) {
 			yz.init();
-			yz.grow(randomInRange(5, 20), randomInRange(1, 5));
+			yz.grow(randomInRange(3, 10), randomInRange(1, 5));
 		});
 		hdArr1.forEach(function(hd) {
 			hd.init();
 			hd.grow(0.1, 0.1);
 		});
+		
+		
+		run();
 	};
+	var left = null;
+	function run(){
+		left -= 1.5;
+		if(left<=-img_width/2){
+			left = 0;
+		}
+		move.style.left = left + 'px';
+		window.requestAnimationFrame(run);
+	}
 	
 	window.addEventListener('resize',resizeEvent);
 	function resizeEvent(){
@@ -97,22 +100,38 @@
 			attention.style.visibility = "hidden"
 		}
 	}
-	
+//===========================定时摇摆============================================
 	setInterval(function(){
 		sucai1Arr.forEach(function(yz){
 			if(Math.random() > 0.6){
 				yz.shake();
 			}
-		})
+		});
+		hdArr1.forEach(function(hd){
+			if(Math.random() > 0.6){
+				hd.fall();
+			}
+		});
 	}, 15000);
 	
-	tree.addEventListener('mousemove',mousemoveEvent);
+	tree.addEventListener('mousedown',mousemoveEvent);
+	var tag = true;
 	function mousemoveEvent(e){
-		sucai1Arr.forEach(function(yz){
-			if(Math.random() > 0.98){
-				yz.shake();
-			}
-		})
+		
+		if(tag){
+			tag = false;
+			sucai1Arr.forEach(function(yz){
+				if(Math.random() > 0.5){
+					yz.shake();
+				}
+			});
+			hdArr1.forEach(function(hd){
+				if(Math.random() > 0.98){
+					hd.fall();
+				}
+			});
+			tag = true;
+		}
 	};
 	tree.addEventListener('mousedown',function(e){
 		e.preventDefault();
@@ -160,8 +179,11 @@
 		}
 		SucaiObj.prototype.shake = function() {
 			var temp = [-1, 1];
-			if(!this.isFall && !this.isGrow && !this.isShake) {
+			if(!this.isFall ) {
 				this.isShake = true;
+//				TweenMax.killTweensOf(this.el);
+//				TweenMax.killTweensOf(this.el2);
+				console.log('摇摆')
 				new TimelineMax().to([this.el, this.el2], 0.5, {
 						rotation: randomInRange(5,20) * temp[Math.round(Math.random())]
 					})
@@ -170,11 +192,21 @@
 						ease: Elastic.easeOut.config(3, 0.1),
 						onComplete: function(me) {
 							me.isShake = false;
-//							if(Math.random() > 0.3) {
+							if(Math.random() > 0.5) {
 								me.fall();
-//							}
+							}
 						},
-						onCompleteParams: [this]
+						onCompleteParams: [this],
+//						onUpdate:function(me){
+//							me.isShake = false;
+//							
+//							if(Math.random() > 0.995) {
+//								TweenMax.killTweensOf(this.el);
+//								TweenMax.killTweensOf(this.el2);
+//								me.fall();
+//							}
+//						},
+//						onUpdateParams:[this]
 
 					})
 			}

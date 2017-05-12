@@ -87,11 +87,11 @@ body::-webkit-scrollbar{
 		width: 1820px;
 	}
 }
-@media (min-width: 2048px) {
+/*@media (min-width: 2048px) {
 	.container {
 		width: 1948px;
 	}
-}
+}*/
 @media (min-width: 960px) {
 	.nav-center {
 		position: absolute;
@@ -146,6 +146,11 @@ body::-webkit-scrollbar{
 	position: absolute;
 	height: 100%;
 	overflow: hidden;
+	webkit-transform: translate3d(0,0,0);
+-moz-transform: translate3d(0,0,0);
+-ms-transform: translate3d(0,0,0);
+-o-transform: translate3d(0,0,0);
+transform: translate3d(0,0,0);
 }
 
 #box>.move>#bg {

@@ -190,23 +190,23 @@
 					.to([this.el, this.el2], randomInRange(10,15), {
 						rotation: 0,
 						ease: Elastic.easeOut.config(3, 0.1),
-						onComplete: function(me) {
-							me.isShake = false;
-							if(Math.random() > 0.5) {
-								me.fall();
-							}
-						},
-						onCompleteParams: [this],
-//						onUpdate:function(me){
+//						onComplete: function(me) {
 //							me.isShake = false;
-//							
-//							if(Math.random() > 0.995) {
-//								TweenMax.killTweensOf(this.el);
-//								TweenMax.killTweensOf(this.el2);
+//							if(Math.random() > 0.2) {
 //								me.fall();
 //							}
 //						},
-//						onUpdateParams:[this]
+//						onCompleteParams: [this],
+						onUpdate:function(me){
+							me.isShake = false;
+							
+							if(Math.random() > 0.996) {
+								TweenMax.killTweensOf(this.el);
+								TweenMax.killTweensOf(this.el2);
+								me.fall();
+							}
+						},
+						onUpdateParams:[this]
 
 					})
 			}

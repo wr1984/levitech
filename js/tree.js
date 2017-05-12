@@ -42,14 +42,14 @@
 	window.onload = function(){
 		svg_yz = embed.getSVGDocument().querySelector('#svg');
 		
-		var left = null;
-		setInterval(function(){
-			left-=1;
-			if(left <= -img_width/2){
-				left = 0;
-			}
-			move.style.left = left + 'px';
-		},1000/60);
+//		var left = null;
+//		setInterval(function(){
+//			left-=1;
+//			if(left <= -img_width/2){
+//				left = 0;
+//			}
+//			move.style.left = left + 'px';
+//		},1000/24);
 		
 		var yzOrigin = ["0% 100%", "10% 100%", "0% 50%", "0% 100%", "90% 100%", "100% 60%", "90% 100%", "0% 100%", "0% 100%","10% 100%","100% 100%","0% 100%","0% 100%","100% 60%","100% 80%","100% 100%","0% 100%",
 						"0% 100%", "10% 100%", "0% 50%", "0% 100%", "90% 100%", "100% 60%", "90% 100%", "0% 100%", "0% 100%","10% 100%","100% 100%","0% 100%","0% 100%","100% 60%","100% 80%","100% 100%","0% 100%"];
@@ -66,7 +66,19 @@
 			hd.init();
 			hd.grow(0.1, 0.1);
 		});
+		
+		
+		run();
 	};
+	var left = null;
+	function run(){
+		left -= 1.5;
+		if(left<=-img_width/2){
+			left = 0;
+		}
+		move.style.left = left + 'px';
+		window.requestAnimationFrame(run);
+	}
 	
 	window.addEventListener('resize',resizeEvent);
 	function resizeEvent(){
@@ -103,7 +115,12 @@
 			if(Math.random() > 0.6){
 				yz.shake();
 			}
-		})
+		});
+		hdArr1.forEach(function(hd){
+			if(Math.random() > 0.6){
+				hd.fall();
+			}
+		});
 	}, 15000);
 	
 	tree.addEventListener('mousemove',mousemoveEvent);
@@ -112,7 +129,12 @@
 			if(Math.random() > 0.98){
 				yz.shake();
 			}
-		})
+		});
+		hdArr1.forEach(function(hd){
+			if(Math.random() > 0.98){
+				hd.fall();
+			}
+		});
 	};
 	tree.addEventListener('mousedown',function(e){
 		e.preventDefault();
